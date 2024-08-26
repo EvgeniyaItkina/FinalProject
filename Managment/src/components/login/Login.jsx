@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Input, Button } from 'antd';
+import './Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,41 +13,43 @@ const Login = () => {
   };
 
   return (
+    <div className="wave-container">
 
-    <div>
-      <h2>Login</h2>
-      <Form
-        name="basic"
-        initialValues={{ remember: true }}
-        onFinish={(values) => console.log(values)}
-      >
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+      < div className="login-container" >
+        <h2 className="login-title">Login</h2>
+        <Form
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={(values) => console.log(values)}
         >
-          <Input />
-        </Form.Item>
+          <Form.Item
+            label="Username"
+            name="username"
+            rules={[{ required: true, message: 'Please input your username!' }]}
+          >
+            <Input />
+          </Form.Item>
 
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
-          <Input.Password />
-        </Form.Item>
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Input.Password />
+          </Form.Item>
 
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-        <Form.Item>
-          <>
-            Forgot my password
-          </>
-        </Form.Item>
-      </Form>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+          <Form.Item>
+            <>
+              Forgot my password
+            </>
+          </Form.Item>
+        </Form>
+      </div >
     </div>
   )
 }
