@@ -1,0 +1,79 @@
+для начала создания аппликации начний так:
+npm init -y - создать package.json
+потом
+npm install express cors moment fs mongoose morgan chalk joi --save
+npm install express cors mongoose moment dotenv morgan chalk joi jsonwebtoken fs
+потом исправить пакедж джейсон (описано внизу)
+
+
+.gitignore
+/node_modules
+/package-lock.json
+
+1. вместо import используем const express = require('express')
+2. посести все что есть в экстресс в постоянную апп const app = express();
+запуск проекта node и имя файла
+
+3. запусти и слушай порт (сам пишешь номер порта и в случае успеха запусти функцию)
+  app.listen(3875, () => {
+  console.log('listen on port 3875');
+});
+
+4. req - все что я получу на сервер
+  res - что я верну с сервера
+
+app.get('/students', (req, res) => {
+  res.send([
+    { firstName: 'John', lastName: 'John' },
+  ]);
+});
+
+5. для перезапуска сервера при каждом сохранении проекта один раз устанавливаем
+npm i -g nodemon -D
+теперь для зауска проекта нужно писать nodemon и имя файла
+
+
+6.npm i mysql2 --save установка библиотеки mySQL
+
+
+7.установить чтобы разрешить серверу доступ из любого места
+npm i cors --save
+
+на сервере
+const cors = require('cors');
+app.use(cors({
+    origin: true,
+    methods: 'GET,PUT,POST,DELETE,OPTIONS',
+    credentials: true,
+    allowedHeaders: 'Content-Type, Accept',
+}));
+
+npm install -g express-generator - 
+создали app.mjs
+поменять в package.json
+"type": "module",
+  "main": "app.mjs",
+  "start": " nodemon app",
+
+  должно получиться так:
+  {
+  "name": "lesson12---nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "fs": "^0.0.1-security",
+    "moment": "^2.30.1"
+  }
+}
+npm i dotenv
