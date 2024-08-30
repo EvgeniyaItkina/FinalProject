@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Container, Typography, Link } from '@mui/material';
 import './Login.css';
 
+
+const admin = admin;
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -10,7 +13,9 @@ const Login = () => {
     event.preventDefault();
     console.log('Email:', email);
     console.log('Password:', password);
-    // Логика для отправки данных на сервер
+
+    //TODO: Логика для отправки данных на сервер
+    Navigate()
   };
 
   const handleForgotPassword = () => {
