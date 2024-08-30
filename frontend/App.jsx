@@ -1,6 +1,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from './admin/src/components/login/Login.jsx';
+import Login from './shared/login/Login.jsx';
 
 
 function App() {
