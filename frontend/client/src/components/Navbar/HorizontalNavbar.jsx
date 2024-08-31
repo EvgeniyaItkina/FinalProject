@@ -9,6 +9,7 @@ import './Navbar.css';
 
 const HorizontalNavbar = ({ onSearch }) => {
   const [search, setSearch] = useState('');
+  const [isListView, setIsListView] = useState(true);
   const navigate = useNavigate();
 
   const handleSearchChange = (event) => {
@@ -19,14 +20,15 @@ const HorizontalNavbar = ({ onSearch }) => {
     }
   };
 
-  const changeItems = () => {
+  const toggleView = () => {
+    setIsListView(!isListView); // Переключаем состояние
     console.log('Switching items view');
   };
 
   return (
     <div className="horizontal-navbar">
-      <div className="navbar-logo">
-        <img src="./LogoFlyingTeapot.jpg" alt="Logo" />
+      <div className="navbar-logo" onClick={() => { navigate('/') }} style={{ cursor: 'pointer' }}>
+        <img src="/LogoFlyingTeapot.jpg" alt="Logo" />
       </div>
       <div className="navbar-search">
         <CiSearch />
@@ -45,9 +47,8 @@ const HorizontalNavbar = ({ onSearch }) => {
         <Button variant="text" onClick={() => navigate('/about')}>
           About
         </Button>
-        <Button variant="text" onClick={changeItems}>
-          <PiDotsNineBold />
-          <CiViewList style={{ display: 'none' }} />
+        <Button variant="text" onClick={toggleView}>
+          {isListView ? <PiDotsNineBold /> : <CiViewList />}
         </Button>
         <Button variant="text" onClick={() => navigate('/change-language')}>
           <IoLanguage />
