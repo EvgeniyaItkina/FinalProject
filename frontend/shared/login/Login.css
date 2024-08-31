@@ -5,7 +5,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom, #2d2d5c, #000080);
+  /* background: linear-gradient(to bottom, #2d2d5c, #000080); */
   overflow: hidden;
 }
 

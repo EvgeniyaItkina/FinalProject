@@ -1,0 +1,87 @@
+.horizontal-navbar {
+  display: grid;
+  grid-template-areas:
+    "logo logo search search search search phone phone"
+    "logo logo navbar navbar navbar navbar navbar navbar";
+  grid-template-columns: 150px 1fr auto;
+  align-items: center;
+  background-color: #5a056d;
+  color: white;
+  padding: 10px 20px;
+  gap: 10px;
+}
+
+.navbar-logo {
+  grid-area: logo;
+  max-height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo img {
+  max-height: 100%;
+}
+
+.navbar-search {
+  grid-area: search;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-search input {
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+  color: white;
+  background-color: #760176;
+}
+
+.navbar-search input::placeholder {
+  color: #fdfdfd;
+}
+
+.navbar-phone {
+  grid-area: phone;
+}
+
+.navbar-phone .css-1apkmlw-MuiButtonBase-root-MuiButton-root {
+  color: white !important;
+}
+
+.navbar-bottom-row {
+  grid-area: navbar;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.navbar-bottom-row button {
+  color: white;
+  background-color: #760176;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.navbar-bottom-row button:hover {
+  background-color: #777;
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-bottom-row .MuiButton-contained {
+  background-color: #760176;
+  ;
+  color: white;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.navbar-bottom-row .MuiButton-contained:hover {
+  background-color: #31032f;
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}

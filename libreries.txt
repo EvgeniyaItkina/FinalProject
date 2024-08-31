@@ -1,1 +1,3 @@
-npm install @mui/material @emotion/react @emotion/styled
+npm install react-icons
+npm install @mui/material@latest
+npm install @emotion/react @emotion/styled
