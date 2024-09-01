@@ -3,13 +3,15 @@ import { CiSearch, CiViewList } from "react-icons/ci";
 import { PiDotsNineBold } from "react-icons/pi";
 import { IoLanguage } from "react-icons/io5";
 import { BsCart2 } from "react-icons/bs";
-import { Input, Button } from '@mui/material';
+import { Input, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import QRCode from 'react-qr-code';
 import './Navbar.css';
 
 const HorizontalNavbar = ({ onSearch }) => {
   const [search, setSearch] = useState('');
   const [isListView, setIsListView] = useState(true);
+  const [qrOpen, setQrOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSearchChange = (event) => {
@@ -23,6 +25,14 @@ const HorizontalNavbar = ({ onSearch }) => {
   const toggleView = () => {
     setIsListView(!isListView); // Переключаем состояние
     console.log('Switching items view');
+  };
+
+  const handlePhoneClick = () => {
+    setQrOpen(true); // Открываем модальное окно с QR-кодом
+  };
+
+  const handleClose = () => {
+    setQrOpen(false); // Закрываем модальное окно
   };
 
   return (
@@ -39,8 +49,8 @@ const HorizontalNavbar = ({ onSearch }) => {
         />
       </div>
       <div className="navbar-phone">
-        <Button variant="text" onClick={() => navigate('/phone')}>
-          Phone: 05*-***-****
+        <Button variant="text" onClick={handlePhoneClick}>
+          Phone: 054-687650
         </Button>
       </div>
       <div className="navbar-bottom-row">
@@ -63,6 +73,19 @@ const HorizontalNavbar = ({ onSearch }) => {
           Login
         </Button>
       </div>
+      {/* Модальное окно с QR-кодом */}
+      <Dialog open={qrOpen} onClose={handleClose}>
+        <DialogTitle>Contact via WhatsApp</DialogTitle>
+        <DialogContent>
+          <QRCode value="https://wa.me/0546287650" size={256} /> {/* Генерация QR-кода */}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+
     </div>
   );
 };

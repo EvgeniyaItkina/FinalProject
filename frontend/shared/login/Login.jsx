@@ -62,21 +62,7 @@ const Login = () => {
   }
 
   return (
-    <div className="wave-container">
-      <div className="stars">
-        {Array(300).fill(0).map((_, index) => (
-          <div
-            key={index}
-            className="star"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDuration: `${Math.random() * 3 + 1}s`,
-              animationDelay: `${Math.random() * 5}s`
-            }}
-          />
-        ))}
-      </div>
+    <div style={{ margin: 'auto' }}>
       <Container maxWidth="xs" className="login-container">
         <Typography variant="h4" className="login-title" gutterBottom>
           Login

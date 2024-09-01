@@ -9,7 +9,21 @@ import HomePage from './client/src/components/MainContent/HomePage.jsx';
 function App() {
 
   return (
-    <>
+    <div className="wave-container">
+      <div className="stars">
+        {Array(300).fill(0).map((_, index) => (
+          <div
+            key={index}
+            className="star"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDuration: `${Math.random() * 3 + 1}s`,
+              animationDelay: `${Math.random() * 5}s`
+            }}
+          />
+        ))}
+      </div>
       <Router>
         <div className='app-container'>
           <HorizontalNavbar />
@@ -22,7 +36,7 @@ function App() {
           </div>
         </div>
       </Router>
-    </>
+    </div>
   )
 }
 
