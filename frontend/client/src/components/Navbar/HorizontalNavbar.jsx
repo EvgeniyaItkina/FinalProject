@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { CiSearch, CiViewList } from "react-icons/ci";
 import { PiDotsNineBold } from "react-icons/pi";
 import { IoLanguage } from "react-icons/io5";
@@ -7,12 +7,16 @@ import { Input, Button, Dialog, DialogTitle, DialogContent, DialogActions } from
 import { useNavigate } from 'react-router-dom';
 import QRCode from 'react-qr-code';
 import './Navbar.css';
+import { userContext } from '../../../userContext';
 
 const HorizontalNavbar = ({ onSearch }) => {
   const [search, setSearch] = useState('');
   const [isListView, setIsListView] = useState(true);
   const [qrOpen, setQrOpen] = useState(false);
   const navigate = useNavigate();
+  const context = useContext(userContext)
+  console.log(context);
+  // console.log(userState);
 
   const handleSearchChange = (event) => {
     const value = event.target.value;

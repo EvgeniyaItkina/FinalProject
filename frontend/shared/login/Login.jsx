@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Link } from '@mui/material';
 import { Navigate } from 'react-router-dom';
 import './Login.css';
-
+import axios from 'axios';
+/* 
 const adminEmail = "admin";
-const adminPassword = "!qweQwe!";
+const adminPassword = "!qweQwe!"; */
 
 // Примерная функция для проверки пользователя в базе данных
 const findUserByEmail = async (email) => {
@@ -16,7 +17,7 @@ const findUserByEmail = async (email) => {
   return users.find(user => user.email === email);
 };
 
-const Login = () => {
+const Login = ({ userState, setUserState }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -25,12 +26,17 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setMessage("");
+    console.log(userState);
+    setUserState("registrated")
+
 
     if (!email || !password) {
       return setMessage("Please enter your email and password");
     }
 
-    if (email === adminEmail && password === adminPassword) {
+    /* const response = await axios.post('http://localhost:3000/users/login', { email, password }); */
+
+    /* if (email === adminEmail && password === adminPassword) {
       setRedirect({ status: true, path: '/admin' });
     } else {
       const user = await findUserByEmail(email);
@@ -41,7 +47,7 @@ const Login = () => {
       } else {
         setRedirect({ status: true, path: `/client/${user.id}` });
       }
-    }
+    } */
   };
 
   const handleForgotPassword = () => {

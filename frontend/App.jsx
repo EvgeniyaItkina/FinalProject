@@ -4,10 +4,14 @@ import Login from './shared/login/Login.jsx';
 import HorizontalNavbar from './client/src/components/Navbar/HorizontalNavbar.jsx';
 import VerticalNavbar from './client/src/components/Navbar/VerticalNavbar.jsx';
 import HomePage from './client/src/components/MainContent/HomePage.jsx';
-
+import { userContext } from './client/userContext.jsx';
+import { useState } from 'react';
 
 function App() {
 
+  const [userState, setUserState] = useState('unregistered');
+
+  console.log(userState);
   return (
     <div className="wave-container">
       <div className="stars">
@@ -24,18 +28,20 @@ function App() {
           />
         ))}
       </div>
-      <Router>
-        <div className='app-container'>
-          <HorizontalNavbar />
-          <div className='main-container'>
-            <VerticalNavbar />
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
+      <userContext.Provider value={userState}>
+        <Router>
+          <div className='app-container'>
+            <HorizontalNavbar />
+            <div className='main-container'>
+              <VerticalNavbar />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<Login setUserState={setUserState} userState={userState} />} />
+              </Routes>
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
+      </userContext.Provider>
     </div>
   )
 }
