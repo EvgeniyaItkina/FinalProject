@@ -3,9 +3,6 @@ import { TextField, Button, Container, Typography, Link } from '@mui/material';
 import { Navigate } from 'react-router-dom';
 import './Login.css';
 import axios from 'axios';
-/* 
-const adminEmail = "admin";
-const adminPassword = "!qweQwe!"; */
 
 // Примерная функция для проверки пользователя в базе данных
 const findUserByEmail = async (email) => {
@@ -34,20 +31,27 @@ const Login = ({ userState, setUserState }) => {
       return setMessage("Please enter your email and password");
     }
 
-    /* const response = await axios.post('http://localhost:3000/users/login', { email, password }); */
+    try {
+      // Запрос на сервер для логина
+      const response = await axios.post('http://localhost:2024/auth/login', { email, password });
 
-    /* if (email === adminEmail && password === adminPassword) {
-      setRedirect({ status: true, path: '/admin' });
-    } else {
-      const user = await findUserByEmail(email);
-      if (!user) {
-        setMessage("Check your email or password");
-      } else if (user.password !== password) {
-        setMessage("Check your email or password");
+      // Сохраняем токен в localStorage
+      localStorage.setItem('token', response.data.token);
+
+      // Устанавливаем состояние пользователя как авторизованного
+      setUserState("loggedIn");
+
+      // Редирект на другую страницу после успешного входа
+      setRedirect({ status: true, path: '/' });
+
+    } catch (error) {
+      // Обработка ошибок при логине
+      if (error.response) {
+        setMessage(error.response.data.message || "Login failed");
       } else {
-        setRedirect({ status: true, path: `/client/${user.id}` });
+        setMessage("Error logging in");
       }
-    } */
+    }
   };
 
   const handleForgotPassword = () => {

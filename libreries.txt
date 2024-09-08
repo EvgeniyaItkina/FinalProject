@@ -2,3 +2,13 @@ npm install react-icons
 npm install @mui/material@latest
 npm install @emotion/react @emotion/styled
 npm install qrcode.react
+
+
+backend
+npm init -y
+npm install express bcryptjs jsonwebtoken
+npm install --save-dev nodemon
+npm install dotenv
+npm install morgan rotating-file-stream moment
+npm i --save-dev @types/jsonwebtoken
+npm i --save-dev @types/bcryptjs
