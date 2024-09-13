@@ -21,7 +21,7 @@ authRouter.post('/login', async (req, res) => {
         isAdmin: true
       },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      /* { expiresIn: '1h' } */
     );
 
     res.json({ token });
