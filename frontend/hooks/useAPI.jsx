@@ -27,7 +27,8 @@ const useAPI = () => {
 
         //client-admin
         case METHOD.USER_REGISTER:
-          response = await axios.post(`${baseURL}/register`, payload);
+          response = await axios.post(`${baseURL}/auth/register`, payload);
+
           break;
         case METHOD.USER_LOGIN:
           response = await axios.post(`${baseURL}/auth/login`, payload);

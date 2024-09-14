@@ -1,0 +1,10 @@
+Entry Time: 14/09/2024 18:24:46
+Method: POST
+URL: /auth/register
+Response Time: 240.564 ms
+Status: 201
+Entry Time: 14/09/2024 18:25:06
+Method: POST
+URL: /auth/login
+Response Time: 0.906 ms
+Status: 401

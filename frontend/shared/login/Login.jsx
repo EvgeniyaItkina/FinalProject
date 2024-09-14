@@ -93,9 +93,6 @@ const Login = ({ userState, setUserState }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            InputLabelProps={{
-              style: { color: 'black' }, // Change color to black
-            }}
           />
           <TextField
             fullWidth
@@ -106,9 +103,6 @@ const Login = ({ userState, setUserState }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            InputLabelProps={{
-              style: { color: 'black' }, // Change color to black
-            }}
           />
           <Button
             type="submit"

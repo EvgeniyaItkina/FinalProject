@@ -4,6 +4,7 @@ import Login from './shared/login/Login.jsx';
 import HorizontalNavbar from './client/src/components/Navbar/HorizontalNavbar.jsx';
 import VerticalNavbar from './client/src/components/Navbar/VerticalNavbar.jsx';
 import HomePage from './client/src/components/MainContent/HomePage.jsx';
+import Registeration from './shared/registration/Registration.jsx';
 import { UserContext } from './client/UserContext.jsx';
 import { useState } from 'react';
 
@@ -37,6 +38,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<Login setUserState={setUserState} userState={userState} />} />
+                <Route path="/register" element={<Registeration />} />
               </Routes>
             </div>
           </div>

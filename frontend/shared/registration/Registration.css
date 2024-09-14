@@ -1,0 +1,53 @@
+/* Register.css */
+.register-container {
+  position: relative;
+  background-color: rgb(192, 98, 211);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 0 auto;
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 1.1);
+}
+
+.register-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-button {
+  padding: 8px !important;
+  background-color: #712285 !important;
+  margin-bottom: 8px !important;
+}
+
+.register-button:hover {
+  background-color: #5a1b6a;
+}
+
+.register-button .MuiLink-root {
+  padding: 20px;
+  color: #000000;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.error-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  width: 80%;
+}
+
+.error-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
