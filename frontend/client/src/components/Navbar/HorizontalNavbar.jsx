@@ -18,35 +18,17 @@ const HorizontalNavbar = ({ onSearch }) => {
   const navigate = useNavigate();
   const { userState, setUserState } = useContext(UserContext);
 
-  // Проверяем токен в localStorage и обновляем userState при первой загрузке
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const decodedToken = jwtDecode(token); // Декодируем токен
-        if (decodedToken.isAdmin) {
-          setUserState('admin'); // Если isAdmin = true
-        } else {
-          setUserState('registered'); // Если isAdmin = false
-        }
-      } catch (error) {
-        console.error('Ошибка декодирования токена:', error);
-        setUserState('unregistered');
-      }
-    }
-  }, [setUserState]);
-
 
   const handlePhoneClick = () => {
-    setQrOpen(true); // Открываем модальное окно с QR-кодом
+    setQrOpen(true); //Open QR window
   };
 
-  // Функция для закрытия модального окна с QR-кодом
+  // Close QR window
   const handleClose = () => {
     setQrOpen(false);
   };
 
-  // Открытие/закрытие меню профиля
+  //Open/close profile window
   const handleProfileClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -62,7 +44,7 @@ const HorizontalNavbar = ({ onSearch }) => {
     navigate('/');
   };
 
-  //состояние карточек: в строку или в таблицу
+  //table-row cards list
   const toggleView = () => {
     setIsListView(!isListView);
     console.log('Switching items view');
@@ -98,7 +80,7 @@ const HorizontalNavbar = ({ onSearch }) => {
           About
         </Button>
 
-        {/* Незарегистрированный пользователь */}
+        {/* unregistered user */}
         {userState === 'unregistered' && (
           <>
             <Button variant="text" onClick={toggleView}>
@@ -116,8 +98,8 @@ const HorizontalNavbar = ({ onSearch }) => {
           </>
         )}
 
-        {/* Зарегистрированный пользователь */}
-        {userState === 'registered' && (
+        {/* redistered user */}
+        {userState === 'loggedIn' && (
           <>
             <Button variant="text" onClick={() => navigate('/favorites')}>
               Favorite
@@ -146,7 +128,7 @@ const HorizontalNavbar = ({ onSearch }) => {
           </>
         )}
 
-        {/* Администратор */}
+        {/* admin */}
         {userState === 'admin' && (
           <>
             <Button variant="text" onClick={() => navigate('/favorites')}>

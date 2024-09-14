@@ -11,18 +11,39 @@ body {
 
 
 .login-container {
-  background-color: rgb(246, 246, 246);
+  position: relative;
+  background-color: rgb(192 98 211);
   padding: 20px;
   border-radius: 8px;
-  width: 300px;
   margin: 0 auto;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 1.1);
   z-index: 10;
 }
 
 .login-title {
   text-align: center;
   margin-bottom: 20px;
+}
+
+.login-button {
+  padding: 8px !important;
+  background-color: #712285 !important;
+  margin-bottom: 8px !important;
+}
+
+.login-button:hover {
+  background-color: #5a1b6a;
+}
+
+.login-container .MuiLink-root {
+  padding: 20px;
+  color: #000000;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.login-container .MuiLink-root:hover {
+  color: #ddd;
 }
 
 .error-popup {

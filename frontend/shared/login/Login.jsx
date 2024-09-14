@@ -1,57 +1,60 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextField, Button, Container, Typography, Link } from '@mui/material';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import './Login.css';
-import axios from 'axios';
-
-// Примерная функция для проверки пользователя в базе данных
-const findUserByEmail = async (email) => {
-  // Пока просто пример, в будущем здесь будет запрос к базе данных
-  const users = [
-    { id: 1, email: "user1@example.com", password: "password123" },
-    { id: 2, email: "user2@example.com", password: "qwerty456" }
-  ];
-  return users.find(user => user.email === email);
-};
+import useAPI, { METHOD } from '../../hooks/useAPI';
+import { jwtDecode } from "jwt-decode";
 
 const Login = ({ userState, setUserState }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const [redirect, setRedirect] = useState({ status: false, path: '' });
+  const [data, error, isLoading, apiCall] = useAPI();
+  const [successfulReg, setSuccessfulReg] = useState(false);
+  const navigate = useNavigate();
+
+  // Effect for successful login
+  useEffect(() => {
+    if (data) {
+      setSuccessfulReg(true);
+      localStorage.setItem('token', data.token);
+
+      try {
+        const token = localStorage.getItem('token');
+        const decodedToken = jwtDecode(token);
+        if (decodedToken.isAdmin) {
+          setUserState('admin'); // If isAdmin = true
+        } else {
+          setUserState('loggedIn'); // If isAdmin = false
+        }
+      } catch (error) {
+        console.error('Failed to decode token:', error);
+        setMessage('Error processing login.');
+      }
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
+  }, [data, setUserState, navigate]);
+
+  // Effect for handling errors
+  useEffect(() => {
+    if (error) {
+      setMessage(error);
+    }
+  }, [error]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setMessage("");
-    console.log(userState);
-    setUserState("registrated")
-
 
     if (!email || !password) {
       return setMessage("Please enter your email and password");
     }
 
-    try {
-      // Запрос на сервер для логина
-      const response = await axios.post('http://localhost:2024/auth/login', { email, password });
-
-      // Сохраняем токен в localStorage
-      localStorage.setItem('token', response.data.token);
-
-      // Устанавливаем состояние пользователя как авторизованного
-      setUserState("loggedIn");
-
-      // Редирект на другую страницу после успешного входа
-      setRedirect({ status: true, path: '/' });
-
-    } catch (error) {
-      // Обработка ошибок при логине
-      if (error.response) {
-        setMessage(error.response.data.message || "Login failed");
-      } else {
-        setMessage("Error logging in");
-      }
-    }
+    // Call the API method for login
+    await apiCall(METHOD.USER_LOGIN, { email, password });
   };
 
   const handleForgotPassword = () => {
@@ -67,8 +70,12 @@ const Login = ({ userState, setUserState }) => {
     setMessage('');
   };
 
-  if (redirect.status) {
-    return <Navigate to={redirect.path} />;
+  // Display loading state
+  if (isLoading) return <div>Loading...</div>;
+
+  // Display successful registration message
+  if (successfulReg) {
+    return <div className='success-message'>You have successfully logged in</div>;
   }
 
   return (
@@ -86,6 +93,9 @@ const Login = ({ userState, setUserState }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            InputLabelProps={{
+              style: { color: 'black' }, // Change color to black
+            }}
           />
           <TextField
             fullWidth
@@ -96,17 +106,20 @@ const Login = ({ userState, setUserState }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            InputLabelProps={{
+              style: { color: 'black' }, // Change color to black
+            }}
           />
           <Button
             type="submit"
             variant="contained"
             color="primary"
             fullWidth
-            style={{ marginTop: '16px' }}
+            className="login-button"
           >
             Login
           </Button>
-          <Typography variant="body2" color="textSecondary" align="center" style={{ marginTop: '8px' }}>
+          <Typography variant="body2" color="textSecondary" align="center" >
             <Link href="#" onClick={handleForgotPassword} underline="hover">
               Forgot my password
             </Link>
